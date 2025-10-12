@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rest Operator</title>
+</head>
+<body>
+    <script>
+
+        //1. Destructure User object
+        const user = {
+            name: 'Carl',
+            age: 25,
+            province: 'Rizal',
+        };
+        const { name, age } = user;
+        console.log(`Name: ${name}, Age: ${age}`);
+
+        //2. Combine arrays using rest operator
+        const frontend = ["React", "Vue"];
+        const backend = ["Node", "Express"];
+        const fullstack = [...frontend, ...backend];
+        console.log(`Fullstack: ${fullstack}`);
+
+        //3. Function with rest parameters
+        const average = (...numbers) => {
+            if(numbers.length === 0) return 0;
+            const total = numbers.reduce((sum, curr) => sum + curr, 0);
+            return total / numbers.length;
+        };
+        console.log(`The average of 10, 20, and 30 is ${average(10, 20, 30)}.`);
+
+    </script>
+</body>
+</html>
