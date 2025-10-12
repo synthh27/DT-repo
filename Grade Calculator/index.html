@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+
+    <!-- <link rel="stylesheet" href="index.css"> -->
+
+    <style>
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    background-image: url('bg.jpg');
+    background-size:cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+    width: 50rem;
+    /* height: 30rem; */
+    padding: 5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    background-color: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(30px);
+    border-radius: 2rem;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.form-group {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5rem 0;
+    width: 60%;
+    gap: 1rem;
+}
+.form-group label {
+    flex-grow: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    width: 6rem;
+}
+
+.form-group input {
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-group p {
+    flex-grow: 0;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-left: 1rem;
+}
+
+#result {
+    width: 65%;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex: 1;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1rem;
+    margin-left: 1rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+button {
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.03s ease-in-out;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
+}
+    </style>
+</head>
+<body>
+    <main>
+        <h1 class="title">Grade Calculator</h1>
+        <div class="form-group">
+            <label for="project">Project:</label>
+            <input type="number" id="project" min="0" max="100" required> <p>(25%)</p>
+        </div>
+        <div class="form-group">
+            <label for="quiz">Quiz:</label>
+            <input type="number" id="quiz" min="0" max="100" required> <p>(15%)</p>
+        </div>
+        <div class="form-group">
+            <label for="midterm">Midterm:</label>
+            <input oninput="" type="number" id="midterm" min="0" max="100" required> <p>(25%)</p>
+        </div>
+        <div class="form-group">
+            <label for="finals">Finals:</label>
+            <input type="number" id="finals" min="0" max="100" required> <p>(25%)</p>
+        </div>
+        <div class="form-group">
+            <label for="activities">Activities:</label>
+            <input type="number" id="activities" min="0" max="100" required> <p>(10%)</p>
+        </div>
+        <div id="result">Average:</div>
+        <button onclick="calculateGrade()">Calculate Average</button>
+    </main>
+
+    <script>
+        function calculateGrade() {
+            // Get values from inputs
+            const project = parseFloat(document.getElementById('project').value) || 0;
+            const quiz = parseFloat(document.getElementById('quiz').value) || 0;
+            const midterm = parseFloat(document.getElementById('midterm').value) || 0;
+            const finals = parseFloat(document.getElementById('finals').value) || 0;
+            const activities = parseFloat(document.getElementById('activities').value) || 0;
+
+            // Calculate weighted average
+            const average = (
+                (project * 0.25) +     // Project - 25%
+                (quiz * 0.15) +        // Quiz - 15%
+                (midterm * 0.25) +     // Midterm - 25%
+                (finals * 0.25) +      // Finals - 25%
+                (activities * 0.10)     // Activities - 10%
+            );
+
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `Final Grade: ${average.toFixed(2)}%`;
+        }
+    </script>
+</body>
+</html>
