@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Manager</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <main>
+        <div class="header">
+            <h1>Student Record Manager</h1>
+        </div>
+        <div class="content">
+            <div class="form">
+                <div class="form-input">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" placeholder="Ex. Jane, Juan" required>
+                </div>
+                <div class="form-input">
+                    <label for="middleName">Middle Name</label>
+                    <input type="text" name="middleName" id="middleName" placeholder="Ex. McKinley, Ramirez" required>
+                </div>
+                <div class="form-input">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" placeholder="Ex. Doe, Dela Cruz" required>
+                </div>
+                <div class="form-input">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Ex. (+63) 123 45 6789" required>
+                </div>
+                <div class="form-input">
+                    <label for="Address">Address</label>
+                    <input type="text" name="Address" id="Address" placeholder="Ex. Ortigas, Pasig City"  required>
+                </div>
+
+                <div class="cta-btn">
+                    <button id="addBtn">Add Record</button>
+                    <button id="clearBtn">Clear All</button>
+                </div>
+            </div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Middle Name</th>
+                            <th>Last Name</th>
+                            <th>Phone Number</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Table rows will be dynamically added here -->
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const firstNameInput = document.getElementById('firstName');
+        const middleNameInput = document.getElementById('middleName');
+        const lastNameInput = document.getElementById('lastName');
+        const phoneNumberInput = document.getElementById('phoneNumber');
+        const addressInput = document.getElementById('Address');
+        const addBtn = document.getElementById('addBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const tableBody = document.getElementById('tableBody');
+
+        // Array to hold student records
+        let records = [];
+
+        function clearAllRecords() { tableBody.innerHTML = ''; records = []; }
+
+        function clearForm() {
+            firstNameInput.value = '';
+            middleNameInput.value = '';
+            lastNameInput.value = '';
+            phoneNumberInput.value = '';
+            addressInput.value = '';
+        }
+
+        // Function to add a new record to the table
+        function addRecord() {
+            const firstName = firstNameInput.value.trim();
+            const middleName = middleNameInput.value.trim();
+            const lastName = lastNameInput.value.trim();
+            const phoneNumber = phoneNumberInput.value.trim();
+            const address = addressInput.value.trim();
+            if (firstName && middleName && lastName && phoneNumber && address) {
+                records.push({ firstName, middleName, lastName, phoneNumber, address });
+                viewRecords();
+                clearForm();
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function viewRecords() {
+            tableBody.innerHTML = '';
+            records.forEach(record => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${record.firstName}</td>
+                    <td>${record.middleName}</td>
+                    <td>${record.lastName}</td>
+                    <td>${record.phoneNumber}</td>
+                    <td>${record.address}</td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+        }
+        
+
+        addBtn.addEventListener('click', addRecord);
+        clearBtn.addEventListener('click', clearAllRecords);
+    </script>
+    
+</body>
+</html>
